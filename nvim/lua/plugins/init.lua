@@ -32,10 +32,19 @@ return {
     "nvim-treesitter/nvim-treesitter",
       opts = {
         ensure_installed = {
-          "vim", "lua", "vimdoc",
-          "html", "css", "elixir",
-          "gleam", "typescript",
+          "vim",
+          "lua",
+          "vimdoc",
+          "html",
+          "css",
+          "elixir",
+          "heex",
+          "gleam",
+          "typescript",
           "rust",
+      },
+      highlight = {
+        enable = true,
       },
     },
   },
@@ -45,5 +54,17 @@ return {
     init = function()
       vim.g.rustfmt_autosave = 1
     end
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    lazy = false,
+    branch = "canary",
+    dependencies = {
+      { "github/copilot.vim" },
+      { "nvim-lua/plenary.nvim" },
+    },
+    opts = {
+      debug = true,
+    },
   },
 }
