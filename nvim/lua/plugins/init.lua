@@ -25,6 +25,7 @@ return {
         "css-lsp" ,
         "prettier",
         "rust-analyzer",
+        "zls",
       },
     },
   },
@@ -42,6 +43,7 @@ return {
           "gleam",
           "typescript",
           "rust",
+          "zig",
       },
       highlight = {
         enable = true,
@@ -67,4 +69,20 @@ return {
       debug = true,
     },
   },
+  {
+    "epwalsh/obsidian.nvim",
+    lazy = false,
+    ft = "markdown",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "notes",
+          path = "/Users/ChillyBwoy/Projects/github/ChillyBwoy/notes",
+        }
+      }
+    },
+  }
 }
