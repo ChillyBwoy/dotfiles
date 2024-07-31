@@ -80,7 +80,7 @@ return {
       workspaces = {
         {
           name = "notes",
-          path = "/Users/ChillyBwoy/Projects/github/ChillyBwoy/notes",
+          path = "~/Projects/github/ChillyBwoy/notes",
         }
       }
     },
