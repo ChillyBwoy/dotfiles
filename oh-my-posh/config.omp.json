@@ -3,29 +3,30 @@
   "version": 2,
   "final_space": true,
   "palette": {
-    "os:background": "#FEF5ED",
-    "os:foreground": "#011627",
-    "prompt:background": "#1e1e1e",
-    "prompt:foreground": "#7eb8da",
-    "path:background": "#61AFEF",
-    "path:foreground": "#1e1e1e",
-    "battery:charging": "#40c4ff",
-    "battery:discharging": "#ff5722",
-    "battery:full": "#4caf50",
-    "python:background": "#4584b6",
-    "python:foreground": "#ffde57",
-    "node:background": "#026e00",
+    "white": "white",
+    "primary": "blue",
+    "success": "green",
+    "idle": "cyan",
+    "warning": "yellow",
+    "danger": "red",
+    "os:foreground": "p:white",
+    "prompt:foreground": "p:primary",
+    "path:foreground": "p:primary",
+    "battery:foreground": "p:warning",
+    "battery:charging": "p:primary",
+    "battery:discharging": "p:danger",
+    "battery:full": "p:success",
+    "git:foreground": "p:idle",
+    "git:changed": "p:warning",
+    "git:unsynced": "magenta",
+    "git:ahead": "p:success",
+    "git:behind": "p:primary",
+    "session:user": "p:idle",
+    "session:root": "p:danger",
+    "python:foreground": "#4584b6",
     "node:foreground": "#8cc84b",
-    "elixir:foreground": "#ffffff",
-    "elixir:background": "#422251",
-    "git:background": "#4e9a06",
-    "git:foreground": "#000000",
-    "git:changed": "#c4a000",
-    "git:has_conflicts": "#f26d50",
-    "git:ahead": "#89d1dc",
-    "git:behind": "#4e9a06",
-    "root:background": "#ffeb3b",
-    "root:forground": "#BB0000"
+    "elixir:foreground": "#422251",
+    "go:foreground": "#7FD5EA"
   },
   "blocks": [
     {
@@ -33,11 +34,15 @@
       "alignment": "left",
       "segments": [
         {
+          "type": "text",
+          "style": "plain",
+          "template": "\u250c ",
+          "foreground": "p:white"
+        },
+        {
           "type": "os",
-          "style": "diamond",
-          "trailing_diamond": "\ue0b0",
-          "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}}",
-          "background": "p:os:background",
+          "style": "plain",
+          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}}",
           "foreground": "p:os:foreground",
           "properties": {
             "macos": "\uf179 ",
@@ -45,42 +50,36 @@
           }
         },
         {
-          "type": "root",
-          "style": "diamond",
-          "trailing_diamond": "\ue0b0",
-          "foreground": "p:root:foreground",
-          "background": "p:root:background",
-          "template": "  "
-        },
-        {
-          "type": "git",
-          "style": "diamond",
-          "trailing_diamond": "\ue0b0",
-          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
-          "background_templates": [
-            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git:changed{{ end }}",
-            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git:has_conflicts{{ end }}",
-            "{{ if gt .Ahead 0 }}p:git:ahead{{ end }}",
-            "{{ if gt .Behind 0 }}p:git:behind{{ end }}"
-          ],
-          "background": "p:git:background",
-          "foreground": "p:git:foreground",
-          "properties": {
-            "branch_icon": " \uf126 ",
-            "fetch_stash_count": true,
-            "fetch_status": true,
-            "fetch_upstream_icon": true
-          }
+          "type": "session",
+          "style": "plain",
+          "template": "{{ if .SSHSession }} {{ end }}{{ .UserName }} ",
+          "foreground_templates": [
+            "{{ if .Root }}p:session:root{{ else }}p:session:user{{ end }}"
+          ]
         },
         {
           "type": "path",
-          "style": "diamond",
-          "trailing_diamond": "\ue0c6",
-          "template": " {{ .Path }} ",
-          "background": "p:path:background",
+          "style": "plain",
+          "template": "{{ .Path }}",
           "foreground": "p:path:foreground",
           "properties": {
             "style": "full"
+          }
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git:changed{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git:unsynced{{ end }}",
+            "{{ if gt .Ahead 0 }}p:git:ahead{{ end }}",
+            "{{ if gt .Behind 0 }}p:git:behind{{ end }}"
+          ],
+          "foreground": "p:git:foreground",
+          "properties": {
+            "fetch_status": true,
+            "fetch_stash_count": true,
+            "full_branch_path": true
           }
         }
       ]
@@ -90,48 +89,40 @@
       "overflow": "hide",
       "segments": [
         {
-          "type": "battery",
-          "style": "diamond",
-          "leading_diamond": "\ue0c7",
-          "foreground": "#193549",
-          "background": "#ffeb3b",
-          "background_templates": [
-            "{{if eq \"Charging\" .State.String}}p:battery:charging{{end}}",
-            "{{if eq \"Discharging\" .State.String}}p:battery:discharging{{end}}",
-            "{{if eq \"Full\" .State.String}}p:battery:full{{end}}"
-          ],
-          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }} ",
-          "properties": {
-            "discharging_icon": " ",
-            "charging_icon": " ",
-            "charged_icon": " "
-          }
-        },
-        {
           "type": "node",
-          "style": "diamond",
-          "leading_diamond": "\ue0b2",
+          "style": "plain",
           "foreground": "p:node:foreground",
-          "background": "p:node:background",
           "template": " \ue718 {{ .Full }} "
         },
         {
           "type": "elixir",
-          "style": "diamond",
-          "leading_diamond": "\ue0b2",
+          "style": "plain",
           "foreground": "p:eleixir:foreground",
-          "background": "p:elixir:background",
           "template": "  {{ .Full }} "
         },
         {
           "type": "python",
-          "style": "diamond",
-          "leading_diamond": "\ue0b2",
+          "style": "plain",
           "foreground": "p:python:foreground",
-          "background": "p:python:background",
-          "template": " \uE235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} {{ .Venv }} {{ end }}{{ .Full }}{{ end }} ",
+          "template": " \ue235{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} {{ .Venv }} {{ end }}{{ .Full }}{{ end }} ",
           "properties": {
             "display_mode": "files"
+          }
+        },
+        {
+          "type": "battery",
+          "style": "plain",
+          "foreground": "p:battery:foreground",
+          "foreground_templates": [
+            "{{if eq \"Charging\" .State.String}}p:battery:charging{{end}}",
+            "{{if eq \"Discharging\" .State.String}}p:battery:discharging{{end}}",
+            "{{if eq \"Full\" .State.String}}p:battery:full{{end}}"
+          ],
+          "template": "{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }} ",
+          "properties": {
+            "discharging_icon": " ",
+            "charging_icon": " ",
+            "charged_icon": " "
           }
         }
       ],
@@ -144,16 +135,17 @@
         {
           "type": "text",
           "style": "plain",
-          "template": "$",
-          "foreground": "#7eb8da"
+          "template": "\u2514 ",
+          "foreground": "p:white"
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "template": "\u276f",
+          "foreground": "p:prompt:foreground"
         }
       ],
       "newline": true
     }
-  ],
-  "transient_prompt": {
-    "background": "transparent",
-    "foreground": "#ffffff",
-    "template": "{{ .Shell }}> "
-  }
+  ]
 }
