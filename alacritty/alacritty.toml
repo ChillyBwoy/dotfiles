@@ -14,7 +14,10 @@ osc52 = "CopyPaste"
 
 [keyboard]
 bindings = [
-  { key = "Right", mods = "Alt", chars = "\u001bf"},
-  { key = "Left", mods = "Alt", chars = "\u001bb"},
+  { key = "Right", mods = "Alt", chars = "\u001bf" },
+  { key = "Left", mods = "Alt", chars = "\u001bb" },
+  { key = "D", mods = "Command", chars = "\u0002%" },
+  { key = "D", mods = "Command|Shift", chars = "\u0002\""},
+  { key = "W", mods = "Command", chars = "\u0002x" },
 ]
 
