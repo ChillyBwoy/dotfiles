@@ -12,6 +12,7 @@
     "os": "p:white",
     "prompt": "p:primary",
     "transient_prompt": "p:green",
+    "secondary_prompt": "p:cyan",
     "path": "p:primary",
     "battery_foreground": "p:warning",
     "battery_charging": "p:primary",
@@ -70,6 +71,7 @@
         {
           "type": "git",
           "style": "plain",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
           "foreground_templates": [
             "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git_changed{{ end }}",
             "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git_unsynced{{ end }}",
@@ -158,5 +160,9 @@
       "{{ if gt .Code 0 }}p:danger{{ end }}"
     ],
     "template": "  \u276f "
+  },
+  "secondary_prompt": {
+    "foreground": "p:secondary_prompt",
+    "template": "  \u276f\u276f "
   }
 }
