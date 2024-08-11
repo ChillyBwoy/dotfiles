@@ -11,6 +11,7 @@
     "danger": "red",
     "os": "p:white",
     "prompt": "p:primary",
+    "transient_prompt": "p:green",
     "path": "p:primary",
     "battery_foreground": "p:warning",
     "battery_charging": "p:primary",
@@ -31,6 +32,7 @@
     {
       "type": "prompt",
       "alignment": "left",
+      "newline": true,
       "segments": [
         {
           "type": "text",
@@ -130,6 +132,7 @@
     {
       "type": "prompt",
       "alignment": "left",
+      "newline": true,
       "segments": [
         {
           "type": "text",
@@ -141,10 +144,19 @@
           "type": "text",
           "style": "plain",
           "template": "\u276f",
-          "foreground": "p:prompt"
+          "foreground": "p:prompt",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}p:danger{{ end }}"
+          ]
         }
-      ],
-      "newline": true
+      ]
     }
-  ]
+  ],
+  "transient_prompt": {
+    "foreground": "p:transient_prompt",
+    "foreground_templates": [
+      "{{ if gt .Code 0 }}p:danger{{ end }}"
+    ],
+    "template": "  \u276f "
+  }
 }
