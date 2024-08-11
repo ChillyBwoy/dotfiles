@@ -9,24 +9,23 @@
     "idle": "cyan",
     "warning": "yellow",
     "danger": "red",
-    "os:foreground": "p:white",
-    "prompt:foreground": "p:primary",
-    "path:foreground": "p:primary",
-    "battery:foreground": "p:warning",
-    "battery:charging": "p:primary",
+    "os": "p:white",
+    "prompt": "p:primary",
+    "path": "p:primary",
+    "battery_foreground": "p:warning",
+    "battery_charging": "p:primary",
     "battery:discharging": "p:danger",
-    "battery:full": "p:success",
-    "git:foreground": "p:idle",
-    "git:changed": "p:warning",
-    "git:unsynced": "magenta",
-    "git:ahead": "p:success",
-    "git:behind": "p:primary",
-    "session:user": "p:idle",
-    "session:root": "p:danger",
-    "python:foreground": "#4584b6",
-    "node:foreground": "#8cc84b",
-    "elixir:foreground": "#b4a2be",
-    "go:foreground": "#7FD5EA"
+    "battery_full": "p:success",
+    "git": "p:idle",
+    "git_changed": "p:warning",
+    "git_unsynced": "magenta",
+    "git_ahead": "p:success",
+    "git_behind": "p:primary",
+    "session_user": "p:idle",
+    "session_root": "p:danger",
+    "python": "#4584b6",
+    "node": "#8cc84b",
+    "elixir": "#b4a2be"
   },
   "blocks": [
     {
@@ -43,7 +42,7 @@
           "type": "os",
           "style": "plain",
           "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}}",
-          "foreground": "p:os:foreground",
+          "foreground": "p:os",
           "properties": {
             "macos": "\uf179 ",
             "ubuntu": "\uf31b "
@@ -54,14 +53,14 @@
           "style": "plain",
           "template": "{{ if .SSHSession }} {{ end }}{{ if .Root }}\uf0e7{{ else }}\ueb99{{ end }} ",
           "foreground_templates": [
-            "{{ if .Root }}p:session:root{{ else }}p:session:user{{ end }}"
+            "{{ if .Root }}p:session_root{{ else }}p:session_user{{ end }}"
           ]
         },
         {
           "type": "path",
           "style": "plain",
           "template": "{{ .Path }}",
-          "foreground": "p:path:foreground",
+          "foreground": "p:path",
           "properties": {
             "style": "full"
           }
@@ -70,12 +69,12 @@
           "type": "git",
           "style": "plain",
           "foreground_templates": [
-            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git:changed{{ end }}",
-            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git:unsynced{{ end }}",
-            "{{ if gt .Ahead 0 }}p:git:ahead{{ end }}",
-            "{{ if gt .Behind 0 }}p:git:behind{{ end }}"
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git_changed{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git_unsynced{{ end }}",
+            "{{ if gt .Ahead 0 }}p:git_ahead{{ end }}",
+            "{{ if gt .Behind 0 }}p:git_behind{{ end }}"
           ],
-          "foreground": "p:git:foreground",
+          "foreground": "p:git",
           "properties": {
             "fetch_status": true,
             "fetch_stash_count": true,
@@ -91,19 +90,19 @@
         {
           "type": "node",
           "style": "plain",
-          "foreground": "p:node:foreground",
+          "foreground": "p:node",
           "template": " \ue718 {{ .Full }} "
         },
         {
           "type": "elixir",
           "style": "plain",
-          "foreground": "p:elixir:foreground",
+          "foreground": "p:elixir",
           "template": "  {{ .Full }} "
         },
         {
           "type": "python",
           "style": "plain",
-          "foreground": "p:python:foreground",
+          "foreground": "p:python",
           "template": " \ue235{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} {{ .Venv }} {{ end }}{{ .Full }}{{ end }} ",
           "properties": {
             "display_mode": "files"
@@ -112,11 +111,11 @@
         {
           "type": "battery",
           "style": "plain",
-          "foreground": "p:battery:foreground",
+          "foreground": "p:battery_foreground",
           "foreground_templates": [
-            "{{if eq \"Charging\" .State.String}}p:battery:charging{{end}}",
+            "{{if eq \"Charging\" .State.String}}p:battery_charging{{end}}",
             "{{if eq \"Discharging\" .State.String}}p:battery:discharging{{end}}",
-            "{{if eq \"Full\" .State.String}}p:battery:full{{end}}"
+            "{{if eq \"Full\" .State.String}}p:battery_full{{end}}"
           ],
           "template": "{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }} ",
           "properties": {
@@ -142,7 +141,7 @@
           "type": "text",
           "style": "plain",
           "template": "\u276f",
-          "foreground": "p:prompt:foreground"
+          "foreground": "p:prompt"
         }
       ],
       "newline": true
