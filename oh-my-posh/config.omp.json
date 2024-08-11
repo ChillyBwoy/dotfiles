@@ -25,7 +25,7 @@
     "session:root": "p:danger",
     "python:foreground": "#4584b6",
     "node:foreground": "#8cc84b",
-    "elixir:foreground": "#422251",
+    "elixir:foreground": "#b4a2be",
     "go:foreground": "#7FD5EA"
   },
   "blocks": [
@@ -97,7 +97,7 @@
         {
           "type": "elixir",
           "style": "plain",
-          "foreground": "p:eleixir:foreground",
+          "foreground": "p:elixir:foreground",
           "template": "  {{ .Full }} "
         },
         {
