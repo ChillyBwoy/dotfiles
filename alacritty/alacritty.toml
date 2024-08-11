@@ -1,0 +1,13 @@
+[font]
+normal = { family = "MesloLGM Nerd Font" }
+size = 15.0
+
+[window]
+decorations = "Full"
+opacity = 0.9
+
+[colors]
+primary = { background = "#272727", foreground = "#e8dbb6" }
+
+[terminal]
+osc52 = "CopyPaste"
