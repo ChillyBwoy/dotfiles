@@ -54,7 +54,7 @@
         {
           "type": "session",
           "style": "plain",
-          "template": "{{ if .SSHSession }} {{ end }}{{ if .Root }}\uf0e7{{ else }}\ueb99{{ end }} ",
+          "template": "{{ if .SSHSession }}  {{ end }}{{ if .Root }}\uf0e7{{ else }}\ueb99{{ end }} ",
           "foreground_templates": [
             "{{ if .Root }}p:session_root{{ else }}p:session_user{{ end }}"
           ]
