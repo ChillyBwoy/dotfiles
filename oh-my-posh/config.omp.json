@@ -44,7 +44,7 @@
         {
           "type": "os",
           "style": "plain",
-          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}}",
+          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
           "foreground": "p:os",
           "properties": {
             "macos": "\uf179 ",
@@ -95,19 +95,19 @@
           "type": "node",
           "style": "plain",
           "foreground": "p:node",
-          "template": " \ue718 {{ .Full }} "
+          "template": " \ue718 {{ .Full }}"
         },
         {
           "type": "elixir",
           "style": "plain",
           "foreground": "p:elixir",
-          "template": "  {{ .Full }} "
+          "template": "  {{ .Full }}"
         },
         {
           "type": "python",
           "style": "plain",
           "foreground": "p:python",
-          "template": " \ue235{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} {{ .Venv }} {{ end }}{{ .Full }}{{ end }} ",
+          "template": " \ue235{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} {{ .Venv }} {{ end }}{{ .Full }}{{ end }}",
           "properties": {
             "display_mode": "files"
           }
@@ -121,7 +121,7 @@
             "{{if eq \"Discharging\" .State.String}}p:battery:discharging{{end}}",
             "{{if eq \"Full\" .State.String}}p:battery_full{{end}}"
           ],
-          "template": "{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }} ",
+          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }} ",
           "properties": {
             "discharging_icon": " ",
             "charging_icon": " ",
