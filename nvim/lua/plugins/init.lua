@@ -80,7 +80,7 @@ return {
       workspaces = {
         {
           name = "notes",
-          path = "~/Projects/github/ChillyBwoy/notes",
+          path = vim.env.NVIM_OBSIDIAN_WORKSPACE_NOTES,
         }
       }
     },
