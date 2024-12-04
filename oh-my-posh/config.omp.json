@@ -1,168 +1,168 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-  "version": 2,
-  "final_space": true,
   "palette": {
-    "white": "white",
-    "primary": "blue",
-    "success": "green",
-    "idle": "cyan",
-    "warning": "yellow",
-    "danger": "red",
-    "os": "p:white",
-    "prompt": "p:primary",
-    "transient_prompt": "p:green",
-    "secondary_prompt": "p:cyan",
-    "path": "p:primary",
-    "battery_foreground": "p:warning",
-    "battery_charging": "p:primary",
     "battery:discharging": "p:danger",
+    "battery_charging": "p:primary",
+    "battery_foreground": "p:warning",
     "battery_full": "p:success",
+    "danger": "red",
+    "elixir": "#b4a2be",
     "git": "p:idle",
-    "git_changed": "p:warning",
-    "git_unsynced": "magenta",
     "git_ahead": "p:success",
     "git_behind": "p:primary",
-    "session_user": "p:idle",
-    "session_root": "p:danger",
-    "python": "#4584b6",
+    "git_changed": "p:warning",
+    "git_unsynced": "magenta",
+    "idle": "cyan",
     "node": "#8cc84b",
-    "elixir": "#b4a2be"
+    "os": "p:white",
+    "path": "p:primary",
+    "primary": "blue",
+    "prompt": "p:primary",
+    "python": "#4584b6",
+    "secondary_prompt": "p:cyan",
+    "session_root": "p:danger",
+    "session_user": "p:idle",
+    "success": "green",
+    "transient_prompt": "p:green",
+    "warning": "yellow",
+    "white": "white"
+  },
+  "secondary_prompt": {
+    "template": "  ❯❯ ",
+    "foreground": "p:secondary_prompt"
+  },
+  "transient_prompt": {
+    "template": "  ❯ ",
+    "foreground": "p:transient_prompt",
+    "foreground_templates": [
+      "{{ if gt .Code 0 }}p:danger{{ end }}"
+    ]
   },
   "blocks": [
     {
       "type": "prompt",
       "alignment": "left",
-      "newline": true,
       "segments": [
         {
-          "type": "text",
-          "style": "plain",
           "template": "\u250c ",
-          "foreground": "p:white"
+          "foreground": "p:white",
+          "type": "text",
+          "style": "plain"
         },
         {
-          "type": "os",
-          "style": "plain",
-          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
-          "foreground": "p:os",
           "properties": {
             "macos": "\uf179 ",
             "ubuntu": "\uf31b "
-          }
+          },
+          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
+          "foreground": "p:os",
+          "type": "os",
+          "style": "plain"
         },
         {
+          "template": "{{ if .SSHSession }}\ueba9  {{ end }}{{ if .Root }}\uf0e7{{ else }}\ueb99{{ end }} ",
           "type": "session",
           "style": "plain",
-          "template": "{{ if .SSHSession }}  {{ end }}{{ if .Root }}\uf0e7{{ else }}\ueb99{{ end }} ",
           "foreground_templates": [
             "{{ if .Root }}p:session_root{{ else }}p:session_user{{ end }}"
           ]
         },
         {
-          "type": "path",
-          "style": "plain",
-          "template": "{{ .Path }}",
-          "foreground": "p:path",
           "properties": {
             "style": "full"
-          }
+          },
+          "template": "{{ .Path }}",
+          "foreground": "p:path",
+          "type": "path",
+          "style": "plain"
         },
         {
+          "properties": {
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "full_branch_path": true
+          },
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
+          "foreground": "p:git",
           "type": "git",
           "style": "plain",
-          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
           "foreground_templates": [
             "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git_changed{{ end }}",
             "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git_unsynced{{ end }}",
             "{{ if gt .Ahead 0 }}p:git_ahead{{ end }}",
             "{{ if gt .Behind 0 }}p:git_behind{{ end }}"
-          ],
-          "foreground": "p:git",
-          "properties": {
-            "fetch_status": true,
-            "fetch_stash_count": true,
-            "full_branch_path": true
-          }
+          ]
         }
-      ]
+      ],
+      "newline": true
     },
     {
+      "type": "prompt",
       "alignment": "right",
       "overflow": "hide",
       "segments": [
         {
-          "type": "node",
-          "style": "plain",
+          "template": " \ue718 {{ .Full }}",
           "foreground": "p:node",
-          "template": " \ue718 {{ .Full }}"
+          "type": "node",
+          "style": "plain"
         },
         {
-          "type": "elixir",
-          "style": "plain",
+          "template": " \ue62d {{ .Full }}",
           "foreground": "p:elixir",
-          "template": "  {{ .Full }}"
+          "type": "elixir",
+          "style": "plain"
         },
         {
-          "type": "python",
-          "style": "plain",
-          "foreground": "p:python",
-          "template": " \ue235{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} {{ .Venv }} {{ end }}{{ .Full }}{{ end }}",
           "properties": {
             "display_mode": "files"
-          }
+          },
+          "template": " \ue235{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} {{ .Venv }} {{ end }}{{ .Full }}{{ end }}",
+          "foreground": "p:python",
+          "type": "python",
+          "style": "plain"
         },
         {
+          "properties": {
+            "charged_icon": "\ue22f ",
+            "charging_icon": "\ue234 ",
+            "discharging_icon": "\ue231 "
+          },
+          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}\uf295 ",
+          "foreground": "p:battery_foreground",
           "type": "battery",
           "style": "plain",
-          "foreground": "p:battery_foreground",
           "foreground_templates": [
             "{{if eq \"Charging\" .State.String}}p:battery_charging{{end}}",
             "{{if eq \"Discharging\" .State.String}}p:battery:discharging{{end}}",
             "{{if eq \"Full\" .State.String}}p:battery_full{{end}}"
-          ],
-          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }} ",
-          "properties": {
-            "discharging_icon": " ",
-            "charging_icon": " ",
-            "charged_icon": " "
-          }
+          ]
         }
-      ],
-      "type": "prompt"
+      ]
     },
     {
       "type": "prompt",
       "alignment": "left",
-      "newline": true,
       "segments": [
         {
-          "type": "text",
-          "style": "plain",
           "template": "\u2514 ",
-          "foreground": "p:white"
+          "foreground": "p:white",
+          "type": "text",
+          "style": "plain"
         },
         {
+          "template": "❯",
+          "foreground": "p:prompt",
           "type": "text",
           "style": "plain",
-          "template": "\u276f",
-          "foreground": "p:prompt",
           "foreground_templates": [
             "{{ if gt .Code 0 }}p:danger{{ end }}"
           ]
         }
-      ]
+      ],
+      "newline": true
     }
   ],
-  "transient_prompt": {
-    "foreground": "p:transient_prompt",
-    "foreground_templates": [
-      "{{ if gt .Code 0 }}p:danger{{ end }}"
-    ],
-    "template": "  \u276f "
-  },
-  "secondary_prompt": {
-    "foreground": "p:secondary_prompt",
-    "template": "  \u276f\u276f "
-  }
+  "version": 3,
+  "final_space": true
 }
