@@ -9,7 +9,7 @@ return {
       "lua_ls",
       "pyright",
       "ts_ls",
-      "vue_ls",
+      "vuels",
     },
   },
   dependencies = {
