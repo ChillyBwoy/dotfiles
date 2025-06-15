@@ -1,7 +1,26 @@
 return {
   "neovim/nvim-lspconfig",
-  config = function()
+  dependencies = {
+    "saghen/blink.cmp",
+  },
+  opts = {
+    servers = {
+      cssls = {},
+      elixirls = {},
+      eslint = {},
+      html = {},
+      lua_ls = {},
+      pyright = {},
+      ts_ls = {},
+      vue_ls = {},
+    },
+  },
+  config = function(_, opts)
     local lspconfig = require("lspconfig")
-    lspconfig.ts_ls.setup({})
-  end
+
+    for server, config in pairs(opts.servers) do
+      config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+      lspconfig[server].setup(config)
+    end
+  end,
 }
