@@ -11,6 +11,7 @@ return {
       "ts_ls",
       "vuels",
     },
+    automatic_installation = true,
   },
   dependencies = {
     { "mason-org/mason.nvim", opts = {} },
