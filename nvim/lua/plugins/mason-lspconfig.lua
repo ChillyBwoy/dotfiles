@@ -10,6 +10,7 @@ return {
       "pyright",
       "ts_ls",
       "vuels",
+      "ocamllsp",
     },
     automatic_installation = true,
   },

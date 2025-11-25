@@ -13,6 +13,7 @@ return {
       pyright = {},
       ts_ls = {},
       vuels = {},
+      ocamllsp = {},
     },
   },
   config = function(_, opts)
