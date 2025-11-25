@@ -82,8 +82,8 @@
 
 # resize-overlay-duration = 4s 200ms
 
-theme = Flexoki Dark
-background-opacity = 0.8
+theme = TokyoNight Night
+background-opacity = 0.9
 background-blur = 8
 
 font-feature = -dlig
