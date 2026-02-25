@@ -1,5 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
   "palette": {
     "battery:discharging": "p:danger",
     "battery_charging": "p:primary",
@@ -19,25 +20,28 @@
     "primary": "blue",
     "prompt": "p:primary",
     "python": "#4584b6",
+    "rust": "#ce422b",
     "secondary_prompt": "p:cyan",
     "session_root": "p:danger",
     "session_user": "p:idle",
     "success": "green",
+    "time": "p:idle",
     "transient_prompt": "p:green",
     "warning": "yellow",
     "white": "white"
   },
   "secondary_prompt": {
-    "template": "  ❯❯ ",
+    "template": "❯❯",
     "foreground": "p:secondary_prompt"
   },
   "transient_prompt": {
-    "template": "  ❯ ",
+    "template": "❯",
     "foreground": "p:transient_prompt",
     "foreground_templates": [
       "{{ if gt .Code 0 }}p:danger{{ end }}"
     ]
   },
+  "final_space": true,
   "blocks": [
     {
       "type": "prompt",
@@ -50,17 +54,7 @@
           "style": "plain"
         },
         {
-          "properties": {
-            "macos": "\uf179 ",
-            "ubuntu": "\uf31b "
-          },
-          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
-          "foreground": "p:os",
-          "type": "os",
-          "style": "plain"
-        },
-        {
-          "template": "{{ if .SSHSession }}\ueba9  {{ end }}{{ if .Root }}\uf0e7{{ else }}\ueb99{{ end }} ",
+          "template": "{{ if .SSHSession }}\ueba9 {{ end }}{{ if .Root }}\uf0e7{{ else }}\ueb99{{ end }} ",
           "type": "session",
           "style": "plain",
           "foreground_templates": [
@@ -68,19 +62,19 @@
           ]
         },
         {
-          "properties": {
+          "type": "path",
+          "options": {
             "style": "full"
           },
           "template": "{{ .Path }}",
           "foreground": "p:path",
-          "type": "path",
           "style": "plain"
         },
         {
-          "properties": {
-            "fetch_stash_count": true,
+          "options": {
+            "fetch_bare_info": true,
             "fetch_status": true,
-            "full_branch_path": true
+            "fetch_push_status": true
           },
           "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
           "foreground": "p:git",
@@ -102,41 +96,32 @@
       "overflow": "hide",
       "segments": [
         {
-          "template": " \ue718 {{ .Full }}",
-          "foreground": "p:node",
-          "type": "node",
-          "style": "plain"
-        },
-        {
-          "template": " \ue62d {{ .Full }}",
-          "foreground": "p:elixir",
-          "type": "elixir",
-          "style": "plain"
-        },
-        {
-          "properties": {
-            "display_mode": "files"
-          },
-          "template": " \ue235{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} {{ .Venv }} {{ end }}{{ .Full }}{{ end }}",
-          "foreground": "p:python",
-          "type": "python",
-          "style": "plain"
-        },
-        {
-          "properties": {
-            "charged_icon": "\ue22f ",
-            "charging_icon": "\ue234 ",
-            "discharging_icon": "\ue231 "
-          },
-          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}\uf295 ",
-          "foreground": "p:battery_foreground",
           "type": "battery",
+          "template": "{{ if not .Error }}{{ if eq \"Charging\" .State.String }}\uf0e7{{ else if eq \"Discharging\" .State.String }}\uf242{{ else if eq \"Full\" .State.String }}\uf240{{ else }}\uf243{{ end }} {{ .Percentage }}%{{ end }}",
+          "foreground": "p:battery_foreground",
           "style": "plain",
           "foreground_templates": [
             "{{if eq \"Charging\" .State.String}}p:battery_charging{{end}}",
             "{{if eq \"Discharging\" .State.String}}p:battery:discharging{{end}}",
             "{{if eq \"Full\" .State.String}}p:battery_full{{end}}"
           ]
+        },
+        {
+          "type": "time",
+          "style": "plain",
+          "template": " \uf017 {{ .CurrentDate | date \"15:04:05\" }} ",
+          "foreground": "p:time"
+        },
+        {
+          "options": {
+            "macos": "\uf179 ",
+            "raspbian": "\uf315 ",
+            "ubuntu": "\uf31b "
+          },
+          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}}",
+          "foreground": "p:os",
+          "type": "os",
+          "style": "plain"
         }
       ]
     },
@@ -151,6 +136,33 @@
           "style": "plain"
         },
         {
+          "template": "\ue718 {{ .Full }} ",
+          "foreground": "p:node",
+          "type": "node",
+          "style": "plain"
+        },
+        {
+          "template": "\ue62d {{ .Full }} ",
+          "foreground": "p:elixir",
+          "type": "elixir",
+          "style": "plain"
+        },
+        {
+          "template": "\ue7a8 {{ .Full }} ",
+          "foreground": "p:rust",
+          "type": "rust",
+          "style": "plain"
+        },
+        {
+          "options": {
+            "display_mode": "files"
+          },
+          "template": "\ue235{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} {{ .Venv }} {{ end }}{{ .Full }}{{ end }} ",
+          "foreground": "p:python",
+          "type": "python",
+          "style": "plain"
+        },
+        {
           "template": "❯",
           "foreground": "p:prompt",
           "type": "text",
@@ -162,7 +174,5 @@
       ],
       "newline": true
     }
-  ],
-  "version": 3,
-  "final_space": true
+  ]
 }
