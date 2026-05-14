@@ -90,3 +90,6 @@ font-feature = -dlig
 font-size = 16.0
 
 working-directory = home
+
+custom-shader = shaders/cursor_warp.glsl
+
