@@ -15,7 +15,12 @@ return {
     renderer = {},
     filters = {
       git_ignored = false,
-      dotfiles = true,
+      dotfiles = false,
+      custom = {
+        "**/__pycache__",
+        "**/.DS_Store",
+        "**/.git",
+      },
     },
   },
 }

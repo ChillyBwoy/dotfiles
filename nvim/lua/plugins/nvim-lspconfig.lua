@@ -9,11 +9,15 @@ return {
       elixirls = {},
       eslint = {},
       html = {},
-      lua_ls = {},
+      lua_ls = {
+        diagnostics = {
+          globals = { "vim" },
+        },
+      },
       pyright = {},
       ts_ls = {},
       vuels = {},
-      ocamllsp = {},
+      gleam = {},
     },
   },
   config = function(_, opts)
