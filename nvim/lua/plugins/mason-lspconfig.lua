@@ -12,6 +12,7 @@ return {
       "vue_ls",
       "tailwindcss",
       "zls",
+      "rust_analyzer",
     },
     automatic_installation = true,
   },

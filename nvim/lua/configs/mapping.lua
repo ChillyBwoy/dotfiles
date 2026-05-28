@@ -1,10 +1,12 @@
 local set = vim.keymap.set
 
+-- nvim-tree mappings
+--
 set("n", "<C-S-b>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
 set("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
 set("n", "<C-w>d", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "show diagnostic floating window" })
 
--- barbar mappings
+-- barbar.nvim mappings
 
 set("n", "<A-,>", "<cmd>BufferPrevious<CR>", { desc = "prev buffer" })
 set("n", "<A-.>", "<cmd>BufferNext<CR>", { desc = "next buffer" })

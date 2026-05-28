@@ -19,6 +19,7 @@ return {
       vuels = {},
       gleam = {},
       zls = {},
+      rust_analyzer = {},
     },
   },
   config = function(_, opts)
