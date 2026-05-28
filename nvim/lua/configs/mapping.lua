@@ -1,15 +1,20 @@
 local set = vim.keymap.set
 
--- nvim-tree mappings
---
-set("n", "<C-S-b>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
-set("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
-set("n", "<C-w>d", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "show diagnostic floating window" })
+-- base
+
+set({ "n", "i", "v" }, "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
+set({ "n", "i", "v" }, "<D-s>", "<cmd>w<CR>", { desc = "Save file with Cmd+S" })
+
+-- nvim-tree mapings
+
+set("n", "<C-S-b>", "<cmd>NvimTreeToggle<CR>", { desc = "nvim-tree toggle window" })
+set("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvim-tree focus window" })
+set("n", "<C-w>d", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Show diagnostic floating window" })
 
 -- barbar.nvim mappings
 
-set("n", "<A-,>", "<cmd>BufferPrevious<CR>", { desc = "prev buffer" })
-set("n", "<A-.>", "<cmd>BufferNext<CR>", { desc = "next buffer" })
+set("n", "<A-,>", "<cmd>BufferPrevious<CR>", { desc = "Prev buffer" })
+set("n", "<A-.>", "<cmd>BufferNext<CR>", { desc = "Next buffer" })
 
 set("n", "<A-1>", "<cmd>BufferGoto 1<CR>", {})
 set("n", "<A-2>", "<cmd>BufferGoto 2<CR>", {})
@@ -21,4 +26,4 @@ set("n", "<A-7>", "<cmd>BufferGoto 7<CR>", {})
 set("n", "<A-8>", "<cmd>BufferGoto 8<CR>", {})
 set("n", "<A-9>", "<cmd>BufferGoto 9<CR>", {})
 
-set("n", "<A-c>", "<Cmd>BufferClose<CR>", { desc = "close buffer" })
+set("n", "<A-c>", "<Cmd>BufferClose<CR>", { desc = "Close buffer" })
