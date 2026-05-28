@@ -18,6 +18,7 @@ return {
       ts_ls = {},
       vuels = {},
       gleam = {},
+      zls = {},
     },
   },
   config = function(_, opts)

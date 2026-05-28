@@ -11,6 +11,7 @@ return {
       "ts_ls",
       "vue_ls",
       "tailwindcss",
+      "zls",
     },
     automatic_installation = true,
   },
