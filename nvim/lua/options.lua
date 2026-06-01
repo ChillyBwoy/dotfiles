@@ -40,3 +40,5 @@ vim.opt.number = true -- shows line numbers;
 
 -- Cursor
 vim.opt.cursorline = true
+
+vim.lsp.enable("gleam")

@@ -17,6 +17,7 @@ return {
         "gleam",
         "typescript",
         "python",
+        "gleam",
       },
       highlight = {
         enable = true,

@@ -5,11 +5,14 @@ local set = vim.keymap.set
 set({ "n", "i", "v" }, "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
 set({ "n", "i", "v" }, "<D-s>", "<cmd>w<CR>", { desc = "Save file with Cmd+S" })
 
+set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "LSP Go to Definition" })
+set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
+
 -- nvim-tree mapings
 
 set("n", "<C-S-b>", "<cmd>NvimTreeToggle<CR>", { desc = "nvim-tree toggle window" })
-set("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvim-tree focus window" })
-set("n", "<C-w>d", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Show diagnostic floating window" })
+set("n", "<leader><tab>", "<cmd>NvimTreeFocus<CR>", { desc = "nvim-tree focus window" })
+set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Show diagnostic floating window" })
 
 -- barbar.nvim mappings
 

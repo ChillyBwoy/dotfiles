@@ -6,6 +6,7 @@ return {
       css = { "prettier" },
       html = { "prettier" },
       elixir = { "mix" },
+      gleam = { "gleam" },
     },
 
     format_on_save = {
