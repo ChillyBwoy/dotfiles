@@ -7,7 +7,7 @@ set({ "n", "i", "v" }, "<D-s>", "<cmd>w<CR>", { desc = "Save file with Cmd+S" })
 
 set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "LSP Go to Definition" })
 set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
-
+set("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover Info" })
 -- nvim-tree mapings
 
 set("n", "<C-S-b>", "<cmd>NvimTreeToggle<CR>", { desc = "nvim-tree toggle window" })

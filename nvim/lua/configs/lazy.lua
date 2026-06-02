@@ -21,7 +21,6 @@ require("lazy").setup({
     -- import your plugins
     { import = "plugins" },
   },
-  install = { colorscheme = { "kanagawa" } },
   -- automatically check for plugin updates
   checker = { enabled = false },
 })
