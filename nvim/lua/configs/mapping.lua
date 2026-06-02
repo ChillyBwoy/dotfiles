@@ -7,13 +7,22 @@ set({ "n", "i", "v" }, "<D-s>", "<cmd>w<CR>", { desc = "Save file with Cmd+S" })
 
 set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "LSP Go to Definition" })
 set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
-set("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover Info" })
+set("n", "K", function()
+  vim.lsp.buf.hover({
+    border = "single",
+    focusable = true,
+  })
+end, { desc = "LSP Hover Info" })
+set("n", "<leader>e", function()
+  vim.diagnostic.open_float({
+    border = "single",
+    focusable = true,
+  })
+end, { desc = "Show diagnostic floating window" })
 -- nvim-tree mapings
 
 set("n", "<C-S-b>", "<cmd>NvimTreeToggle<CR>", { desc = "nvim-tree toggle window" })
 set("n", "<leader><tab>", "<cmd>NvimTreeFocus<CR>", { desc = "nvim-tree focus window" })
-set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Show diagnostic floating window" })
-
 -- barbar.nvim mappings
 
 set("n", "<A-,>", "<cmd>BufferPrevious<CR>", { desc = "Prev buffer" })
