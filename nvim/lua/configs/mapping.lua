@@ -5,6 +5,9 @@ local set = vim.keymap.set
 set({ "n", "i", "v" }, "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
 set({ "n", "i", "v" }, "<D-s>", "<cmd>w<CR>", { desc = "Save file with Cmd+S" })
 
+set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
+set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
+
 -- LSP
 
 set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "LSP Go to Definition" })
