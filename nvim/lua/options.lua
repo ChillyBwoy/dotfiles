@@ -41,4 +41,11 @@ vim.opt.number = true -- shows line numbers;
 -- Cursor
 vim.opt.cursorline = true
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "elixir" },
+  callback = function()
+    vim.treesitter.start()
+  end,
+})
+
 vim.lsp.enable("gleam")
