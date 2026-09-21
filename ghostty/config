@@ -1,4 +1,4 @@
-theme = TokyoNight Night
+theme = TokyoNight
 background-opacity = 0.9
 background-blur = 8
 
@@ -9,6 +9,4 @@ working-directory = home
 
 macos-option-as-alt = left
 
-custom-shader = shaders/cursor_warp.glsl
-
-
+custom-shader = shaders/cursor_warp.glsl  
