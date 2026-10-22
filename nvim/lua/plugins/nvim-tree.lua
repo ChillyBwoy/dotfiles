@@ -18,9 +18,13 @@ return {
       dotfiles = false,
       custom = {
         "**/__pycache__",
-        "**/.DS_Store",
         "**/.git",
+        "^\\.DS_Store$",
       },
+      exclude = {
+        ".gitkeep",
+        ".gitignore",
+      }
     },
   },
 }
